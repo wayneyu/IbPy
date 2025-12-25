@@ -47,13 +47,12 @@ class ReceiverType(type):
         return type(name, bases, namespace)
 
 
-class Receiver(object):
+class Receiver(object, metaclass=ReceiverType):
     """ Receiver -> dispatches messages to interested callables
 
     Instances implement the EWrapper interface by way of the
     metaclass.
     """
-    __metaclass__ = ReceiverType
 
     def __init__(self, dispatcher):
         """ Initializer.

@@ -158,7 +158,7 @@ class Double(float):
     """
     ##
     # sentinel value used by the socket writer
-    MAX_VALUE = sys.maxint
+    MAX_VALUE = sys.maxsize
 
     @staticmethod
     def parseDouble(text):
@@ -176,7 +176,7 @@ class Integer(int):
     """
     ##
     # sentinel value used by the socket writer
-    MAX_VALUE = sys.maxint
+    MAX_VALUE = sys.maxsize
 
     @staticmethod
     def parseInt(text):
@@ -192,9 +192,9 @@ class Integer(int):
         """ Long from string.
 
         @param text value to parse
-        @return long instance
+        @return int instance (long in Python 2, int in Python 3)
         """
-        return long(text or 0)
+        return int(text or 0)
 
 
 ##
@@ -236,7 +236,7 @@ class Socket(socket.socket):
         try:
             throwaway = self.getpeername()
             return True
-        except (socket.error, ), ex:
+        except socket.error as ex:
             return False
         
 
@@ -385,7 +385,7 @@ class Thread(ThreadType):
 
     def term(self):
         def isInterrupted():
-            print 'down town'
+            print('down town')
             return True
         self.isInterrupted = isInterrupted
         self.m_dis.stream.shutdown(socket.SHUT_RDWR)

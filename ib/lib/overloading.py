@@ -38,9 +38,9 @@ Python 2.5 is required due to the use of predicates any() and all().
 
 from types import MethodType as instancemethod
 
-# Make the environment more like Python 3.0
+# Python 3 compatibility - zip is already an iterator in Python 3
 __metaclass__ = type
-from itertools import izip as zip
+# from itertools import izip as zip  # Not needed in Python 3
 
 
 class overloaded:
